@@ -10,28 +10,36 @@ import java.util.TimerTask;
 
 public class LoadingActivity extends AppCompatActivity {
 
-    TimerTask timerTask;
+    private boolean isActivityRunning = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_activity);
 
-        timerTask = new TimerTask() {
+
+        new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                if (isActivityRunning) {
+                    startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                }
                 finish();
+
             }
-        };
+        }, 3000);
 
-        new Timer().schedule(timerTask, 3000);
     }
-
 
     @Override
     protected void onPause() {
+        isActivityRunning = false;
         super.onPause();
-        timerTask.cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        isActivityRunning = true;
+        super.onResume();
     }
 }

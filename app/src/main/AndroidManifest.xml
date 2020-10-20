@@ -9,14 +9,16 @@
         android:supportsRtl="true"
         android:roundIcon="@mipmap/launcher_ico_round"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".LoadingActivity">
+        <activity android:name=".LoadingActivity"
+            android:configChanges="orientation|keyboard|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|keyboard|screenSize">
 
         </activity>
     </application>
