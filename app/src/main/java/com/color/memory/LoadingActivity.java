@@ -10,17 +10,28 @@ import java.util.TimerTask;
 
 public class LoadingActivity extends AppCompatActivity {
 
+    TimerTask timerTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_activity);
 
-        new Timer().schedule(new TimerTask() {
+        timerTask = new TimerTask() {
             @Override
             public void run() {
                 startActivity(new Intent(LoadingActivity.this, MainActivity.class));
                 finish();
             }
-        }, 3000);
+        };
+
+        new Timer().schedule(timerTask, 3000);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timerTask.cancel();
     }
 }
